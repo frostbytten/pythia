@@ -1,3 +1,4 @@
+import logging
 import os
 
 import fiona
@@ -49,13 +50,16 @@ def peer(run, sample_size=None):
 
 def read_layer_by_cell(idx, data, layers, sites):
     if data is None:
+        logging.error("No data found")
         return None
     lng, lat = sites[idx]
     cell = {"lat": lat, "lng": lng, "xcrd": lng, "ycrd": lat}
     for i, c in enumerate(data):
         if c[idx] is None:
+            logging.info("--DEBUG: Data not found in layer: %s", layers[i])
             return None
         if layers[i] == "harvestArea" and c[idx] == 0:
+            logging.info("--DEBUG: Data not found in layer: %s", layers[i])
             return None
         else:
             cell[layers[i]] = c[idx]
