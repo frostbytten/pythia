@@ -20,8 +20,10 @@ def get_site_raster_value(dataset, band, site):
     try:
         data = band[row, col]
         if (data is ma.masked):
+            logging.info("--DEBUG: data is masked and not being found.")
             data = None
     except IndexError:
+        logging.info("--DEBUG: data is masked and not being found.")
         data = None
     return data
 
