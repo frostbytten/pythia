@@ -24,6 +24,7 @@ def build_context(args):
                 if res is not None:
                     context = {**context, **res}
                 else:
+                    logging.info("-- DEBUG: context being set to None!")
                     context = None
                     break
     return context
