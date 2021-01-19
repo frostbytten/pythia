@@ -93,10 +93,10 @@ def lookup_ghr(k, run, context, config):
     args = run[k].split("::")[1:]
     if "raster" in args:
         logging.debug("lookup_ghr - context[%s] => %s", k, context[k])
-        if not "ghr_profile" in cache:
+        if not "ghr_profiles" in cache:
             build_ghr_cache(config)
             tif_profile_id = (int(str(context[k])),)
-            id_soil = cache["ghr_profile"][tif_profile_id] 
+            id_soil = cache["ghr_profiles"][tif_profile_id] 
             if id_soil and id_soil.strip() != "":
                 sol_file = "{}.SOL".format(id_soil[:2].upper())
                 return {k: id_soil, "soilFiles": [os.path.join(config["ghr_root"], sol_file)]}
