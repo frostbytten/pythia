@@ -107,7 +107,8 @@ def lookup_ghr(k, run, context, config):
 def split_fert_dap_percent(k, run, context, _):
     args = run[k].split("::")[1:]
     if args[0].startswith("$"):
-        total = run[args[0][1:]]
+        search_context = args[0][1:]
+        total = float(context[search_context])
     else:
         total = float(args[0])
     # splits = int(args[1])
