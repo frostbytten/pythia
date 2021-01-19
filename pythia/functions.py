@@ -95,15 +95,14 @@ def lookup_ghr(k, run, context, config):
         logging.debug("lookup_ghr - context[%s] => %s", k, context[k])
         if not "ghr_profiles" in cache:
             build_ghr_cache(config)
-            tif_profile_id = int(str(context[k]))
-            id_soil = cache["ghr_profiles"][tif_profile_id] 
-            if id_soil and id_soil.strip() != "":
-                sol_file = "{}.SOL".format(id_soil[:2].upper())
-                return {k: id_soil, "soilFiles": [os.path.join(config["ghr_root"], sol_file)]}
-            else:
-                logging.error("Soil NOT found for id: %s at (%f,%f)", tif_profile_id, context["lng"], context["lat"])
-                return None
-
+        tif_profile_id = int(str(context[k]))
+        id_soil = cache["ghr_profiles"][tif_profile_id] 
+        if id_soil and id_soil.strip() != "":
+            sol_file = "{}.SOL".format(id_soil[:2].upper())
+            return {k: id_soil, "soilFiles": [os.path.join(config["ghr_root"], sol_file)]}
+        else:
+            logging.error("Soil NOT found for id: %s at (%f,%f)", tif_profile_id, context["lng"], context["lat"])
+            return None
 
 def split_fert_dap_percent(k, run, context, _):
     args = run[k].split("::")[1:]
