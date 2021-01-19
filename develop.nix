@@ -7,7 +7,6 @@ in pkgs.mkShell rec {
   venvDir = "./.venv";
   buildInputs = [
     pkgs.python37
-    pkgs.pipenv
     pp.venvShellHook 
     pp.poetry
 
@@ -24,7 +23,7 @@ in pkgs.mkShell rec {
   '';
   postVenvCreation = ''
     unset SOURCE_DATE_EPOCH
-    pipenv install
+    poetry install
   '';
 
   postShellHook = ''
