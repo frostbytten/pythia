@@ -72,7 +72,7 @@ def generate_ic_layers(k, run, context, _):
     return {k: [dict(zip(layer_labels, cl)) for cl in calculated_layers]}
 
 
-def build_ghr_cache():
+def build_ghr_cache(config):
     import os
     import sqlite3
     with sqlite3.connect(os.path.join(config["ghr_root"], "GHR.db")) as conn:
@@ -94,7 +94,7 @@ def lookup_ghr(k, run, context, config):
     if "raster" in args:
         logging.debug("lookup_ghr - context[%s] => %s", k, context[k])
         if not "ghr_profile" in cache:
-            build_ghr_cache()
+            build_ghr_cache(config)
             tif_profile_id = (int(str(context[k])),)
             id_soil = cache["ghr_profile"][tif_profile_id] 
             if id_soil and id_soil.strip() != "":
