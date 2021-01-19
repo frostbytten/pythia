@@ -1,5 +1,6 @@
 import datetime
 import logging
+import os
 
 from pythia.cache_manager import cache
 import pythia.io
@@ -73,7 +74,6 @@ def generate_ic_layers(k, run, context, _):
 
 
 def build_ghr_cache(config):
-    import os
     import sqlite3
     with sqlite3.connect(os.path.join(config["ghr_root"], "GHR.db")) as conn:
         cache["ghr_profiles"] = {}
