@@ -96,6 +96,9 @@ def lookup_ghr(k, run, context, config):
         if not "ghr_profiles" in cache:
             build_ghr_cache(config)
         tif_profile_id = int(str(context[k]))
+        if not tif_profile_id in cache["ghr_profiles"]:
+            logging.error("Invalid soil ID (%d) at (%f,%f)", tif_profile_id, context["lng"], context["lat"])
+            return None
         id_soil = cache["ghr_profiles"][tif_profile_id] 
         if id_soil and id_soil.strip() != "":
             sol_file = "{}.SOL".format(id_soil[:2].upper())
